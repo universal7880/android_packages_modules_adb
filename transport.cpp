@@ -794,14 +794,12 @@ static void fdevent_register_transport(atransport* t) {
     if (t->GetConnectionState() != kCsNoPerm) {
         t->connection()->SetTransport(t);
 
-        if (t->type == kTransportUsb
 #if ADB_HOST
-            && usb_devices_start_detached()  // -d setting propagated from the
-                                             // host device, hence n/a on-device.
-#endif
-        ) {
+        if (t->type == kTransportUsb && usb_devices_start_detached()) {
             t->SetConnectionState(kCsDetached);
-        } else {
+        } else
+#endif
+        {
             t->connection()->Start();
 #if ADB_HOST
             send_connect(t);
