@@ -226,7 +226,6 @@ libadb_srcs = [
     "sysdeps/errno.cpp",
     "transport.cpp",
     "transport_fd.cpp",
-    "transport_legacy.cpp",
     "types.cpp",
 ]
 
@@ -568,6 +567,7 @@ cc_library_static {
     compile_multilib: "both",
 
     srcs: libadb_srcs + libadb_linux_srcs + libadb_posix_srcs + [
+        "transport_legacy.cpp",
         "daemon/adb_wifi.cpp",
         "daemon/auth.cpp",
         "daemon/jdwp_service.cpp",
